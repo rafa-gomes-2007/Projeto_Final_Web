@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+
+    <main>
+        <div class="container">
+            <h1>Cadastro</h1>
+
+            <form action="register.php" method="get">
+                <div class="nome">
+                    <input type="text" name="name" placeholder="Nome" aria-label="name">
+                </div>
+
+                <div class="sobrenome">
+                    <input type="text" name="sobrenome" placeholder="Sobrenome" aria-label="sobrenome">
+                </div>
+
+                <div class="e-mail">
+                    <input type="text" name="e-mail" placeholder="E-mail" aria-label="e-mail">
+                </div>
+
+                <div class="cpf">
+                    <input type="text" name="cpf" placeholder="CPF" aria-label="cpf">
+                </div>
+
+                <div class="telefone">
+                    <input type="text" name="telefone" placeholder="Telefone" aria-label="telefone">
+                </div>
+
+                <div class="aniversario">
+                    <input type="text" name="aniversario" placeholder="Aniversario" aria-label="aniversario">
+                </div>
+                <div class="endereço">
+                    <input type="text" name="endereço" placeholder="Endereço" aria-label="endereço">
+                </div>
+
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Limpar">
+                <input type="submit" value="Mostrar Dados Cadastrados">
+            </form>
+
+            <table id="tabela" border="1">
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>E-Mail</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Data de Nascimento</th>
+                    <th>Endereço</th>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
