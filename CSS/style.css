@@ -85,11 +85,8 @@ main{
     border-collapse: collapse;
 }
 
-.tabela th{
+.tabela th,td{
+    text-align: center;
     font-size: 20px;
     padding: 8px 8px;
-}
-
-.tabela td {
-    padding: 16px 16px;
 }
