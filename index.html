@@ -14,35 +14,37 @@
 
             <form action="register.php" method="get">
                 <div class="nome">
-                    <input type="text" name="name" placeholder="Nome" aria-label="name">
+                    <input type="text" name="name" placeholder="Nome" aria-label="name" required>
                 </div>
 
                 <div class="sobrenome">
-                    <input type="text" name="sobrenome" placeholder="Sobrenome" aria-label="sobrenome">
+                    <input type="text" name="sobrenome" placeholder="Sobrenome" aria-label="sobrenome" required>
                 </div>
 
                 <div class="e-mail">
-                    <input type="text" name="e-mail" placeholder="E-mail" aria-label="e-mail">
+                    <input type="text" name="e-mail" placeholder="E-mail" aria-label="e-mail" required>
                 </div>
 
                 <div class="cpf">
-                    <input type="text" name="cpf" placeholder="CPF" aria-label="cpf">
+                    <input type="text" name="cpf" placeholder="CPF" aria-label="cpf" required>
                 </div>
 
                 <div class="telefone">
-                    <input type="text" name="telefone" placeholder="Telefone" aria-label="telefone">
+                    <input type="text" name="telefone" placeholder="Telefone" aria-label="telefone" required>
                 </div>
 
                 <div class="aniversario">
-                    <input type="text" name="aniversario" placeholder="Aniversario" aria-label="aniversario">
+                    <input type="text" name="aniversario" placeholder="Aniversario" aria-label="aniversario" required>
                 </div>
                 <div class="endereço">
-                    <input type="text" name="endereço" placeholder="Endereço" aria-label="endereço">
+                    <input type="text" name="endereço" placeholder="Endereço" aria-label="endereço" required>
                 </div>
 
-                <input type="submit" value="Enviar">
-                <input type="reset" value="Limpar">
-                <input type="submit" value="Mostrar Dados Cadastrados">
+                <div class="botao">
+                    <button type="submit">Enviar</button>
+                    <button type="reset">Limpar</button>
+                    <button type="menu">Mostrar Dados Cadastrados</button>
+                </div>
             </form>
 
             <table id="tabela" border="1">
