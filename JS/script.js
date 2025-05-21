@@ -27,13 +27,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const data = document.getElementById("data").value.trim()
         const endereço = document.getElementById("endereço").value.trim()
 
+        if(!nome || !sobrenome || !email || !cpf || !telefone || !data || !endereço) {
+            alert("Preencha todos os campos")
+            return
+        }
+
         const novoCadastro = {
             nome: nome,
             sobrenome: sobrenome,
             email: email,
             cpf: cpf,
             telefone: telefone,
-            data: data,
+            data: data, 
             endereço: endereço,
         }
 
@@ -50,6 +55,36 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         localStorage.setItem("cadastros", JSON.stringify(cadastros))
+
+
+        function atualizarTabela() {
+            tabela.innerHTML = ""
+
+            cadastros.forEach((cadastro, index) => {
+                const linha = document.createElement("tr")
+
+                linha.innerHTML = `
+                    <td>${cadastro.nome}</td> 
+                    <td>${cadastro.sobrenome}</td> 
+                    <td>${cadastro.cpf}</td> 
+                    <td>${cadastro.email}</td> 
+                    <td>${cadastro.telefone}</td> 
+                    <td>${cadastro.data}</td> 
+                    <td>${cadastro.endereço}</td> 
+
+                    <td>
+                        <button class="details-btn">Detalhes</button>
+                        <button class="delete-btn">Excluir</button>
+                    </td> 
+                `
+
+                tabela.appendChild(linha)
+            })
+        }
+
+
+        salvarCadastros()
+        atualizarTabela()
 
         form.reset()
     })
