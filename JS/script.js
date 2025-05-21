@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         console.log("Formulário enviado")
 
-
-
         const nome = document.getElementById("name").value.trim()
         const sobrenome = document.getElementById("sobrenome").value.trim()
         const email = document.getElementById("email").value.trim()

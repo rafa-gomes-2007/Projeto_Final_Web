@@ -56,11 +56,37 @@ main{
     border: 0.8px solid black;
 }
 
+a{
+    color: #1f1c0d;
+    font-family: "Roboto-Dark";
+    text-decoration: none;
+    border: 0.8px solid black;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 300px;
+    width: auto;
+    margin-block: 20px;
+    margin-inline: 15px;
+    padding: 12px 6px;
+    border-radius: 12px;
+    background-color: #fff;
+}
+
+a:hover{
+    background-color: rgb(14, 0, 141);
+    color: rgb(236, 241, 255);
+    transition: 0.5s;
+}
+
 .botao{
     display: flex;
 }
 
 .botao button{
+    font-family: "Roboto-Dark";
     border: 0.8px solid black;
     cursor: pointer;
     font-size: 18px;
