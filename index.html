@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="./CSS/style.css">
-    <script src="../JS/script.js" defer></script>
+    <script src="./JS/script.js" defer></script>
 </head>
 <body>
     <main>
@@ -13,19 +13,34 @@
             <h1>Cadastro</h1>
 
             <form id="formCadastro">
-                <input type="text" id="name" placeholder="Nome">
-                <input type="text" id="sobrenome" placeholder="Sobrenome">
-                <input type="text" id="email" placeholder="E-mail">
-                <input type="text" id="cpf" placeholder="CPF">
-                <input type="text" id="telefone" placeholder="Telefone">
-                <input type="text" id="data" placeholder="Data de Nascimento">
-                <input type="text" id="endereco" placeholder="Endereço">
+                <div>
+                    <input type="text" id="name" placeholder="Nome">
+                </div>
+                <div>
+                    <input type="text" id="sobrenome" placeholder="Sobrenome">
+                </div>
+                <div>
+                    <input type="text" id="email" placeholder="E-mail">
+                </div>
+                <div>
+                    <input type="text" id="cpf" placeholder="CPF">
+                </div>
+                <div>
+                    <input type="text" id="telefone" placeholder="Telefone">
+                </div>
+                <div>
+                    <input type="text" id="data" placeholder="Data de Nascimento">
+                </div>
+                <div>
+                    <input type="text" id="endereço" placeholder="Endereço">
+                </div>
 
-                <div class="botoes">
-                    <button type="submit" id="botaoSubmit">Cadastrar</button>
+                <div>
+                    <button type="submit">Cadastrar</button>
                     <button type="reset">Limpar</button>
                     <a href="./tabela.html">Ver Cadastros</a>
                 </div>
+
             </form>
         </div>
     </main>
