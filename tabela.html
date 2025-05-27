@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Tabela de Cadastros</title>
     <link rel="stylesheet" href="./CSS/style.css">
-    <script src="../JS/script.js"></script>
+    <script src="../JS/script.js" defer></script>
 </head>
 <body>
     <main>
         <div class="container">
-            <h1>Cadastro</h1>
+            <h1>Dados Cadastrados</h1>
 
-            <div class="botao">
+            <div class="botoes">
                 <a href="./index.html">Novo Cadastro</a>
             </div>
 
-            <table class="tabela" border="1" style="font-family: Roboto-Medium">
-                <tr>
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th>E-Mail</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>Data de Nascimento</th>
-                    <th>Endereço</th>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <table class="tabela" border="1">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>E-mail</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Data de Nascimento</th>
+                        <th>Endereço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão carregados aqui -->
+                </tbody>
             </table>
         </div>
     </main>

@@ -1,74 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="./CSS/style.css">
-    <script src="../JS/script.js"></script>
+    <script src="../JS/script.js" defer></script>
 </head>
 <body>
     <main>
         <div class="container">
             <h1>Cadastro</h1>
 
-            <form id="formCadastro" action="" method="get">
-                <div class="nome">
-                    <input type="text" id="name" placeholder="Nome" aria-label="name" >
-                </div>
+            <form id="formCadastro">
+                <input type="text" id="name" placeholder="Nome">
+                <input type="text" id="sobrenome" placeholder="Sobrenome">
+                <input type="text" id="email" placeholder="E-mail">
+                <input type="text" id="cpf" placeholder="CPF">
+                <input type="text" id="telefone" placeholder="Telefone">
+                <input type="text" id="data" placeholder="Data de Nascimento">
+                <input type="text" id="endereco" placeholder="Endereço">
 
-                <div class="sobrenome">
-                    <input type="text" id="sobrenome" placeholder="Sobrenome" aria-label="sobrenome" >
-                </div>
-
-                <div class="e-mail">
-                    <input type="text" id="email" placeholder="E-mail" aria-label="e-mail" >
-                </div>
-
-                <div class="cpf">
-                    <input type="text" id="cpf" placeholder="CPF" aria-label="cpf" >
-                </div>
-
-                <div class="telefone">
-                    <input type="text" id="telefone" placeholder="Telefone" aria-label="telefone" >
-                </div>
-
-                <div class="data">
-                    <input type="text" id="data" placeholder="Data de Nascimento" aria-label="date" >
-                </div>
-                
-                <div class="endereço">
-                    <input type="text" id="endereço" placeholder="Endereço" aria-label="endereço" >
-                </div>
-
-                <div class="botao">
-                    <button type="submit" class="cadastroSubmit">Enviar</button>
+                <div class="botoes">
+                    <button type="submit" id="botaoSubmit">Cadastrar</button>
                     <button type="reset">Limpar</button>
-                    <a href="./tabela.html">Dados Cadastrados</a>
+                    <a href="./tabela.html">Ver Cadastros</a>
                 </div>
             </form>
-
-            <table class="tabela" border="1" style="font-family: Roboto-Medium">
-                <tr>
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th>E-Mail</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>Data de Nascimento</th>
-                    <th>Endereço</th>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
         </div>
     </main>
 </body>
