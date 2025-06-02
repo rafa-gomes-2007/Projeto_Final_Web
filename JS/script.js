@@ -1,21 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Script carregado");
-
     const form = document.getElementById("formCadastro");
-    const tabela = document.querySelector("table"); // Seleciona a tabela da página tabela.html
+    const tabela = document.querySelector("table");
 
     let cadastros = JSON.parse(localStorage.getItem("cadastros")) || [];
+    let indexEditando = null;
 
-    // 🔥 Máscara CPF
+    // Máscaras
     function mascaraCPF(cpf) {
         return cpf
             .replace(/\D/g, "")
             .replace(/(\d{3})(\d)/, "$1.$2")
             .replace(/(\d{3})(\d)/, "$1.$2")
-            .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+            .substring(0, 14); // Limita para 14 caracteres
     }
 
-    // 🔥 Máscara Telefone
     function mascaraTelefone(telefone) {
         return telefone
             .replace(/\D/g, "")
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/(-\d{4})\d+?$/, "$1");
     }
 
-    // 🔥 Máscara Data
     function mascaraData(data) {
         return data
             .replace(/\D/g, "")
@@ -33,10 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/(\d{4})\d+?$/, "$1");
     }
 
-    // 🎯 Aplica as máscaras se estiver na página de cadastro
+    function mascaraCEP(cep) {
+        return cep
+            .replace(/\D/g, "")
+            .replace(/(\d{5})(\d)/, "$1-$2")
+            .replace(/(-\d{3})\d+?$/, "$1");
+    }
+
     const inputCPF = document.getElementById("cpf");
     const inputTelefone = document.getElementById("telefone");
     const inputData = document.getElementById("data");
+    const inputCEP = document.getElementById("cep");
 
     if (inputCPF) {
         inputCPF.addEventListener("input", (e) => {
@@ -56,18 +61,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 📝 Função para salvar no localStorage
+    if (inputCEP) {
+        inputCEP.addEventListener("input", (e) => {
+            e.target.value = mascaraCEP(e.target.value);
+        });
+    }
+
     function salvarCadastros() {
         localStorage.setItem("cadastros", JSON.stringify(cadastros));
     }
 
-    // 🚀 Atualiza a tabela na página tabela.html
     function atualizarTabela() {
-        if (!tabela) return; // Se não estiver na página da tabela, sai
+        if (!tabela) return;
 
         const linhas = tabela.querySelectorAll("tr");
         linhas.forEach((linha, index) => {
-            if (index !== 0) linha.remove(); // Mantém só o cabeçalho
+            if (index !== 0) linha.remove();
         });
 
         cadastros.forEach((cadastro, index) => {
@@ -79,15 +88,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${cadastro.cpf}</td>
                 <td>${cadastro.telefone}</td>
                 <td>${cadastro.data}</td>
-                <td>${cadastro.endereco}</td>
+                <td>${cadastro.cep}</td>
+                <td>${cadastro.estado}</td>
                 <td>
+                    <button class="edit-btn" data-index="${index}">Editar</button>
                     <button class="delete-btn" data-index="${index}">Excluir</button>
                 </td>
             `;
             tabela.appendChild(linha);
         });
 
-        // 🎯 Ativa os botões de excluir
         const botoesExcluir = document.querySelectorAll(".delete-btn");
         botoesExcluir.forEach((botao) => {
             botao.addEventListener("click", (e) => {
@@ -97,15 +107,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 atualizarTabela();
             });
         });
+
+        const botoesEditar = document.querySelectorAll(".edit-btn");
+        botoesEditar.forEach((botao) => {
+            botao.addEventListener("click", (e) => {
+                const index = e.target.getAttribute("data-index");
+                const cadastro = cadastros[index];
+
+                localStorage.setItem("editandoIndex", index);
+                window.location.href = "./index.html";
+            });
+        });
     }
 
-    // 🚧 Se estiver na página da tabela, carrega ela
     if (tabela) {
         atualizarTabela();
     }
 
-    // 📄 Função de envio do formulário de cadastro
     if (form) {
+        const indexEditandoStorage = localStorage.getItem("editandoIndex");
+
+        if (indexEditandoStorage !== null) {
+            indexEditando = parseInt(indexEditandoStorage);
+            const cadastro = cadastros[indexEditando];
+
+            document.getElementById("name").value = cadastro.nome;
+            document.getElementById("sobrenome").value = cadastro.sobrenome;
+            document.getElementById("email").value = cadastro.email;
+            document.getElementById("cpf").value = cadastro.cpf;
+            document.getElementById("telefone").value = cadastro.telefone;
+            document.getElementById("data").value = cadastro.data;
+            document.getElementById("cep").value = cadastro.cep;
+            document.getElementById("estado").value = cadastro.estado;
+
+            localStorage.removeItem("editandoIndex");
+        }
+
         form.addEventListener("submit", function (e) {
             e.preventDefault();
 
@@ -115,7 +152,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const cpf = document.getElementById("cpf").value.trim();
             const telefone = document.getElementById("telefone").value.trim();
             const data = document.getElementById("data").value.trim();
-            const endereco = document.getElementById("endereço").value.trim();
+            const cep = document.getElementById("cep").value.trim();
+            const estado = document.getElementById("estado").value.trim();
 
             if (
                 !nome ||
@@ -124,29 +162,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 !cpf ||
                 !telefone ||
                 !data ||
-                !endereco
+                !cep ||
+                !estado
             ) {
                 alert("Preencha todos os campos.");
                 return;
             }
 
-            // 🔍 Regex de validação dos formatos
             const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
             const telefoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
             const dataRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+            const cepRegex = /^\d{5}-\d{3}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!cpfRegex.test(cpf)) {
-                alert("CPF inválido. Formato correto: 000.000.000-00");
+                alert("CPF inválido. Formato: 000.000.000-00");
                 return;
             }
 
             if (!telefoneRegex.test(telefone)) {
-                alert("Telefone inválido. Formato correto: (00) 00000-0000");
+                alert("Telefone inválido. Formato: (00) 00000-0000");
                 return;
             }
 
             if (!dataRegex.test(data)) {
-                alert("Data inválida. Formato correto: dd/mm/aaaa");
+                alert("Data inválida. Formato: dd/mm/aaaa");
+                return;
+            }
+
+            if (!cepRegex.test(cep)) {
+                alert("CEP inválido. Formato: 00000-000");
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert("E-mail inválido.");
                 return;
             }
 
@@ -157,13 +207,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 cpf,
                 telefone,
                 data,
-                endereco,
+                cep,
+                estado
             };
 
-            cadastros.push(novoCadastro);
-            salvarCadastros();
+            if (indexEditando !== null) {
+                cadastros[indexEditando] = novoCadastro;
+                indexEditando = null;
+                alert("Cadastro atualizado com sucesso!");
+            } else {
+                cadastros.push(novoCadastro);
+                alert("Cadastro salvo com sucesso!");
+            }
 
-            alert("Cadastro salvo com sucesso!");
+            salvarCadastros();
             form.reset();
         });
     }
